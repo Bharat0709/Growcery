@@ -8,10 +8,7 @@ const rateLimit = require('express-rate-limit');
 const otpCache = new NodeCache();
 const secretKey = 'your-secret-key';
 
-const client = twilio(
-  'ACa95f244bc0111e18ea45b12f335babb2',
-  '3b2ef9874772dbe2dbf615c500dbbeff'
-);
+const client = twilio(process.env.TWILLIONAME, process.env.TWILLIO);
 
 const limiter = rateLimit({
   windowMs: 5 * 60 * 1000,
