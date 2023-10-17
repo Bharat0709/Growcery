@@ -1,0 +1,142 @@
+[
+  {
+    "_id": "5c88fa8cf4afda39709c2951",
+    "name": "Tea Leaves",
+    "description": "Assam Tea Leaves (250g)",
+    "price": 90,
+    "isVeg": true,
+    "category": "Beverages",
+    "inStock": true,
+    "image": "tea-leaves.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2952",
+    "name": "Basmati Rice",
+    "description": "Premium Basmati Rice (5kg)",
+    "price": 350,
+    "isVeg": true,
+    "category": "Grains",
+    "inStock": true,
+    "image": "basmati-rice.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2953",
+    "name": "Lentils",
+    "description": "Yellow Lentils (1kg)",
+    "price": 70,
+    "isVeg": true,
+    "category": "Pulses",
+    "inStock": true,
+    "image": "lentils.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2954",
+    "name": "Cooking Oil",
+    "description": "Refined Sunflower Oil (1L)",
+    "price": 120,
+    "isVeg": true,
+    "category": "Cooking Essentials",
+    "inStock": true,
+    "image": "cooking-oil.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2955",
+    "name": "Milk",
+    "description": "Fresh Cow's Milk (1L)",
+    "price": 50,
+    "isVeg": true,
+    "category": "Dairy",
+    "inStock": true,
+    "image": "milk.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2956",
+    "name": "Potatoes",
+    "description": "Fresh Potatoes (1kg)",
+    "price": 30,
+    "isVeg": true,
+    "category": "Vegetables",
+    "inStock": true,
+    "image": "potatoes.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2957",
+    "name": "Onions",
+    "description": "Red Onions (1kg)",
+    "price": 40,
+    "isVeg": true,
+    "category": "Vegetables",
+    "inStock": true,
+    "image": "onions.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2958",
+    "name": "Tomatoes",
+    "description": "Fresh Tomatoes (1kg)",
+    "price": 45,
+    "isVeg": true,
+    "category": "Vegetables",
+    "inStock": true,
+    "image": "tomatoes.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2959",
+    "name": "Bananas",
+    "description": "Ripe Bananas (500g)",
+    "price": 20,
+    "isVeg": true,
+    "category": "Fruits",
+    "inStock": true,
+    "image": "bananas.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2960",
+    "name": "Eggs",
+    "description": "Farm Fresh Eggs (12-Pack)",
+    "price": 60,
+    "isVeg": false,
+    "category": "Dairy",
+    "inStock": true,
+    "image": "eggs.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2961",
+    "name": "Wheat Flour",
+    "description": "Whole Wheat Flour (2kg)",
+    "price": 80,
+    "isVeg": true,
+    "category": "Flour",
+    "inStock": true,
+    "image": "wheat-flour.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2962",
+    "name": "Toothpaste",
+    "description": "Mint Toothpaste (100g)",
+    "price": 25,
+    "isVeg": true,
+    "category": "Personal Care",
+    "inStock": true,
+    "image": "toothpaste.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2963",
+    "name": "Shampoo",
+    "description": "Herbal Shampoo (200ml)",
+    "price": 120,
+    "isVeg": true,
+    "category": "Personal Care",
+    "inStock": true,
+    "image": "shampoo.jpg"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2964",
+    "name": "Biscuits",
+    "description": "Chocolate Chip Biscuits (200g)",
+    "price": 35,
+    "isVeg": true,
+    "category": "Snacks",
+    "inStock": true,
+    "image": "biscuits.jpg"
+  }
+]

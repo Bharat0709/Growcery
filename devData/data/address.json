@@ -1,0 +1,63 @@
+[
+  {
+    "_id": "5c8a1d5b0190b214360dc060",
+    "userId": "5c8a1d5b0190b214360dc050",
+    "fullName": "Ramesh Kumar",
+    "phone": "9876543210",
+    "pincode": "400001",
+    "locality": "Downtown Area",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "landmark": "Near Central Park",
+    "alternativePhone": "9876543211",
+    "addressType": "Home"
+  },
+  {
+    "_id": "5c8a1d5b0190b214360dc061",
+    "userId": "5c8a1d5b0190b214360dc050",
+    "fullName": "Sunita Sharma",
+    "phone": "9876543211",
+    "pincode": "110001",
+    "locality": "City Center",
+    "city": "Delhi",
+    "state": "Delhi",
+    "landmark": "Opposite Metro Station",
+    "addressType": "Work"
+  },
+  {
+    "_id": "5c8a1d5b0190b214360dc062",
+    "userId": "5c8a1d5b0190b214360dc050",
+    "fullName": "Amit Patel",
+    "phone": "9876543212",
+    "pincode": "700001",
+    "locality": "Lakeview Colony",
+    "city": "Kolkata",
+    "state": "West Bengal",
+    "landmark": "Next to Lake Park",
+    "addressType": "Other"
+  },
+  {
+    "_id": "5c8a1d5b0190b214360dc063",
+    "userId": "5c8a1d5b0190b214360dc051",
+    "fullName": "Nisha Reddy",
+    "phone": "9876543213",
+    "pincode": "560001",
+    "locality": "Green Enclave",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "addressType": "Home"
+  },
+  {
+    "_id": "5c8a1d5b0190b214360dc064",
+    "userId": "5c8a1d5b0190b214360dc051",
+    "fullName": "Pradeep Singh",
+    "phone": "9876543214",
+    "pincode": "600001",
+    "locality": "Riverfront Avenue",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "landmark": "Near Marina Beach",
+    "alternativePhone": "9876543215",
+    "addressType": "Work"
+  }
+]
