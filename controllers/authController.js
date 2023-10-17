@@ -6,9 +6,11 @@ const jwt = require('jsonwebtoken');
 const twilio = require('twilio');
 const rateLimit = require('express-rate-limit');
 const otpCache = new NodeCache();
+const dotenv = require('dotenv');
 const secretKey = 'your-secret-key';
+dotenv.config({ path: './config.env' });
 
-const client = twilio(process.env.TWILLIONAME, process.env.TWILLIO);
+const client = twilio(process.env.TWILLIOUSERNAME, process.env.TWILLIOPASSWORD);
 
 const limiter = rateLimit({
   windowMs: 5 * 60 * 1000,
