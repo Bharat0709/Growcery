@@ -7,8 +7,8 @@ const twilio = require('twilio');
 const rateLimit = require('express-rate-limit');
 const otpCache = new NodeCache();
 const dotenv = require('dotenv');
-const secretKey = 'your-secret-key';
 dotenv.config({ path: './config.env' });
+const secretKey = process.env.JWT_SECRET;
 
 const client = twilio(process.env.TWILLIOUSERNAME, process.env.TWILLIOPASSWORD);
 
@@ -61,7 +61,6 @@ exports.verifyOTP = async (req, res) => {
       const existingUser = await User.findOne({ mobile });
       if (!existingUser) {
         const user = new User({ mobile });
-        console.log(user);
         await user.save();
       }
 

@@ -1,4 +1,7 @@
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
+const secretKey = process.env.JWT_SECRET;
 
 exports.authenticateJWT = (req, res, next) => {
   console.log('authenticate middleware is called');
@@ -14,7 +17,7 @@ exports.authenticateJWT = (req, res, next) => {
     return res.status(401).json({ message: 'Authentication required' });
   }
 
-  jwt.verify(token, process.env.JWT_SECRET , (err, decoded) => {
+  jwt.verify(token, secretKey, (err, decoded) => {
     if (err) {
       console.error('Error verifying token:', err);
       return res.status(403).json({ message: 'Token is not valid' });
@@ -22,7 +25,7 @@ exports.authenticateJWT = (req, res, next) => {
 
     console.log('Decoded token:', decoded);
 
-    req.userId = decoded.id; 
+    req.userId = decoded.id;
 
     next();
   });
