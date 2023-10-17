@@ -30,9 +30,6 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-// process.on('unhandledRejection', (err) => {
-//   console.log(err.name, err.message);
-//   server.close(() => {
-//     process.exit(1);
-//   });
-// });
+process.on('unhandledRejection', (err) => {
+  console.log(err.name, err.message);
+});

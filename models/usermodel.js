@@ -7,31 +7,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [false, 'Please enter your Name'],
   },
-  email: {
-    type: String,
-    unique: true,
-    trim: true,
-    lowercase: true,
-  },
-  password: {
-    type: String,
-  },
   mobile: {
     type: String,
     required: [true, 'Please enter your Mobile Number'],
     unique: true,
     trim: true,
   },
-  otp: {
-    type: String,
-    required: [false, 'Please enter the OTP'],
-  },
-  addresses: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Address',
-    },
-  ],
   role: {
     type: String,
     enum: ['user', 'admin'], // Define the available roles
