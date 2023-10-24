@@ -8,50 +8,6 @@ const Cart = require('../models/cartmodel');
 const NodeCache = require('node-cache');
 const cache = new NodeCache({ stdTTL: 7 * 24 * 60 * 60 });
 
-// Route to add an item to the user's cart
-// exports.addtocart = async (req, res) => {
-//   const user = req.userId;
-//   const itemId = req.params.itemId;
-//   const quantity = req.body.quantity;
-//   console.log(user, itemId, quantity);
-
-//   try {
-//     const item = await Item.findById(itemId);
-
-//     if (!item) {
-//       return res.status(404).json({ message: 'Item not found' });
-//     }
-
-//     // Find the user's cart and populate user and item data
-//     const cart = await Cart.findOne({ user });
-
-//     if (!cart) {
-//       // Create a new cart if one doesn't exist for the user
-//       const newCart = new Cart({ user, items: [{ item, quantity }] });
-//       await newCart.save();
-//       // } else {
-//       //   const cartItem = cart.items.find(
-//       //     (ci) => ci.item && ci._id.equals(itemId)
-//       //   );
-
-//       //   if (cartItem) {
-//       //     // If the item exists, update the quantity
-//       //     cartItem.quantity += quantity;
-//       //   } else {
-//       //     // If the item does not exist, add it to the cart
-//       //     cart.items.push({ itemId, quantity });
-//       //   }
-
-//       // await cart.save();
-//     }
-
-//     res.status(200).json({ message: 'Item added to cart successfully', cart });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Internal server error' });
-//   }
-// };
-
 // Add item to cart
 exports.addtocart = async (req, res) => {
   const user = req.userId;
