@@ -4,9 +4,9 @@ const { MongoClient } = require('mongodb');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-const Items = require('../../models/Items');
-const User = require('../../models/user');
-const Address = require('../../models/address');
+const Items = require('../../models/Itemsmodel');
+// const User = require('../../models/user');
+// const Address = require('../../models/address');
 
 dotenv.config({ path: './config.env' });
 const DB = process.env.DATABASE.replace(
@@ -29,7 +29,7 @@ const address = JSON.parse(fs.readFileSync(`${__dirname}/address.json`, 'utf-8')
 
 const importData = async () => {
   try {
-    await Address.create(address);
+    // await Address.create(address);
     await Items.create(items);
     // await USer.create(user);
     console.log('Data Successfully Loaded');
@@ -41,7 +41,8 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     // await Items.deleteMany();
-    await User.deleteMany();
+    // await User.deleteMany();
+    await Items.deleteMany();
     console.log('Data Deleted');
     process.exit();
   } catch (arr) {

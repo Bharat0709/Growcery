@@ -9,6 +9,11 @@ const groceryItemSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please enter the description of the item'],
   },
+  rating: {
+    type: Number,
+    min: 1,
+    max: 5,
+  },
   price: {
     type: Number,
     required: [true, 'Please enter the price of the item'],
@@ -18,8 +23,9 @@ const groceryItemSchema = new mongoose.Schema({
     required: [true, 'Please specify if the item is vegetarian or not'],
   },
   category: {
-    type: String,
-    required: [true, 'Please enter the category of the item'],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category', // Reference to the Category schema
+    required: [true, 'Please specify the category of the item'],
   },
   inStock: {
     type: Boolean,
@@ -32,4 +38,3 @@ const groceryItemSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('GroceryItem', groceryItemSchema);
-

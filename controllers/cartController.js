@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const Item = require('../models/Itemsmodel');
 const user = require('../models/usermodel');
 const Cart = require('../models/cartmodel');
+
 // const NodeCache = require('node-cache');
 // const cache = new NodeCache({ stdTTL: 7 * 24 * 60 * 60 });
 
@@ -12,8 +13,10 @@ const Cart = require('../models/cartmodel');
 exports.addtocart = async (req, res) => {
   const user = req.userId;
   const itemId = req.params.itemId;
+
   const quantity = req.body.quantity || 1;
   const itemDetails = await Item.findById(itemId);
+
   if (!itemDetails) {
     return res.status(404).json({ error: 'Item not found' });
   }
