@@ -8,7 +8,6 @@ const CategoriesController = require('../controllers/CategoryController');
 const CartController = require('../controllers/cartController');
 const Router = express.Router();
 
-
 Router.post(
   '/addtocart/:itemId',
   authenticateJWT.authenticateJWT,
@@ -16,11 +15,27 @@ Router.post(
 );
 
 Router.post(
-  '/quantity/:itemId',
+  '/quantityincrease/:itemId',
   authenticateJWT.authenticateJWT,
-  CartController.updateCartItemQuantity
+  CartController.increaseQuantity
+);
+Router.post(
+  '/quantitydecrease/:itemId',
+  authenticateJWT.authenticateJWT,
+  CartController.decreaseQuantity
 );
 
+Router.delete(
+  '/deleteitem/:itemId',
+  authenticateJWT.authenticateJWT,
+  CartController.deleteItemFromCart
+);
+
+Router.get(
+  '/getcartitems',
+  authenticateJWT.authenticateJWT,
+  CartController.getAllItemsInCart
+);
 
 Router.post(
   '/order',
@@ -31,6 +46,5 @@ Router.post(
 Router.get('/allitems', ItemsController.getAllItems);
 Router.get('/categories/allcategories', CategoriesController.getCategories);
 Router.get('/filterItems', ItemsController.filterItems);
-
 
 module.exports = Router;
