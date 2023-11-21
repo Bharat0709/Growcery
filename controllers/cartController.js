@@ -1,31 +1,26 @@
 const Order = require('../models/ordersmodel'); // Import the Order model
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+
 const Item = require('../models/Itemsmodel');
 const user = require('../models/usermodel');
 const Cart = require('../models/cartmodel');
-
-// const NodeCache = require('node-cache');
-// const cache = new NodeCache({ stdTTL: 7 * 24 * 60 * 60 });
 
 // Add item to cart
 exports.addtocart = async (req, res) => {
   const user = req.userId;
   const itemId = req.params.itemId;
-
   const quantity = req.body.quantity || 1;
   const itemDetails = await Item.findById(itemId);
+  console.log(user);
+  console.log(itemDetails);
 
   if (!itemDetails) {
     return res.status(404).json({ error: 'Item not found' });
   }
-
-  // Calculate the new price based on the updated quantity
   const newPrice = itemDetails.price * quantity;
 
   try {
     let cart = await Cart.findOne({ user: user });
+    console.log(cart);
 
     if (!cart) {
       // If the user's cart doesn't exist, create a new cart
@@ -36,17 +31,16 @@ exports.addtocart = async (req, res) => {
     }
 
     const cartItemIndex = cart.items.findIndex(
-      (item) => item.itemDetails._id.toString() === itemId
+      (item) => item.itemId.toString() === itemId
     );
     console.log(cartItemIndex);
 
     if (cartItemIndex !== -1) {
       return res.status(200).json({ message: 'Item is already in the cart' });
     } else {
-      cart.items.push({ itemDetails, quantity, price: newPrice });
+      cart.items.push({ itemId, itemDetails, quantity, price: newPrice });
     }
 
-    // Calculate the total price and total number of items in the cart
     const totalPrice = cart.items.reduce(
       (total, item) => total + item.price,
       0
@@ -57,12 +51,14 @@ exports.addtocart = async (req, res) => {
     );
 
     await cart.save();
+    console.log(cart);
 
     res
       .status(200)
       .json({ message: 'Item added to cart', cart, totalPrice, totalItems });
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error });
+    console.log(error);
   }
 };
 
@@ -76,8 +72,9 @@ exports.increaseQuantity = async (req, res) => {
     return res.status(404).json({ error: 'Cart not found' });
   }
   const cartItemIndex = cart.items.findIndex(
-    (item) => item.itemDetails._id.toString() === itemId
+    (item) => item.itemId.toString() === itemId
   );
+  console.log(cartItemIndex);
 
   if (cartItemIndex !== -1) {
     // Increase the quantity by 1
@@ -115,8 +112,9 @@ exports.decreaseQuantity = async (req, res) => {
   }
 
   const cartItemIndex = cart.items.findIndex(
-    (item) => item.itemDetails._id.toString() === itemId
+    (item) => item.itemId.toString() === itemId
   );
+  console.log(cartItemIndex);
 
   if (cartItemIndex !== -1) {
     // Decrease the quantity by 1, but make sure it doesn't go below 1
@@ -173,8 +171,9 @@ exports.deleteItemFromCart = async (req, res) => {
   }
 
   const cartItemIndex = cart.items.findIndex(
-    (item) => item.itemDetails._id.toString() === itemId
+    (item) => item.itemId.toString() === itemId
   );
+  console.log(cartItemIndex);
 
   if (cartItemIndex !== -1) {
     // Remove the item from the cart

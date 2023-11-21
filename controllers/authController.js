@@ -41,7 +41,6 @@ exports.sendOTP = (req, res) => {
   }
 };
 
-
 exports.verifyOTP = async (req, res) => {
   const { mobile, otp } = req.body;
 
@@ -67,7 +66,7 @@ exports.verifyOTP = async (req, res) => {
       otpCache.del(mobile);
 
       const token = jwt.sign({ id: existingUser }, secretKey, {
-        expiresIn: '7d',
+        expiresIn: '10d',
       });
       console.log(token);
 
