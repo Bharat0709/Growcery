@@ -190,7 +190,8 @@ exports.deleteItemFromCart = async (req, res) => {
 
     res.status(200).json({
       message: 'Item removed from cart',
-      deletedItem,
+      cart,
+      // deletedItem,
       totalPrice: cart.totalPrice,
       totalItems: cart.totalQuantity,
     });
