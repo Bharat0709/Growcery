@@ -1,7 +1,4 @@
-const express = require('express');
-const router = express.Router();
-const Address = require('../models/addressmodel'); // Import the Address model
-const { authenticateJWT } = require('../middlewares/authenticateJWT'); // Import your JWT authentication middleware
+const Address = require('../models/addressmodel'); // Import the Address model // Import your JWT authentication middleware
 
 exports.addaddress = async (req, res) => {
   const userId = req.userId; // Get the user ID from the JWT payload
@@ -48,11 +45,12 @@ exports.getaddress = async (req, res) => {
   try {
     // Get the user ID from the JWT token
     const userId = req.userId;
+    const user = userId._id;
 
     // Find all addresses associated with the user's ID
     const addresses = await Address.find({ userId });
 
-    res.status(200).json(addresses);
+    res.status(200).json({ user, addresses });
   } catch (error) {
     res.status(500).json({ error: 'Error retrieving addresses' });
   }
@@ -72,12 +70,9 @@ exports.updateaddress = async (req, res) => {
     );
 
     if (!address) {
-      return res
-        .status(404)
-        .json({
-          error:
-            'Address not found or you do not have permission to update it.',
-        });
+      return res.status(404).json({
+        error: 'Address not found or you do not have permission to update it.',
+      });
     }
 
     res.status(200).json({ message: 'Address updated successfully', address });

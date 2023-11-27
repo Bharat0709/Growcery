@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const validator = require('validator');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -19,7 +17,6 @@ const userSchema = new mongoose.Schema({
     default: 'user', // Set a default role
   },
 });
-
 
 const User = mongoose.model('User', userSchema);
 
