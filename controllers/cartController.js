@@ -184,7 +184,7 @@ exports.deleteItemFromCart = async (req, res) => {
 
   if (cartItemIndex !== -1) {
     // Remove the item from the cart
-    // const deletedItem = cart.items.splice(cartItemIndex, 1);
+    const deletedItem = cart.items.splice(cartItemIndex, 1);
 
     // Update the cart's total price and total quantity
     cart.totalPrice = cart.items.reduce((total, item) => total + item.price, 0);
@@ -198,7 +198,7 @@ exports.deleteItemFromCart = async (req, res) => {
     res.status(200).json({
       message: 'Item removed from cart',
       cart,
-      // deletedItem,
+      deletedItem,
       totalPrice: cart.totalPrice,
       totalItems: cart.totalQuantity,
     });
