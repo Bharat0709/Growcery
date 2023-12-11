@@ -45,6 +45,10 @@ const addressSchema = new mongoose.Schema({
     enum: ['Home', 'Work', 'Other'],
     default: 'Home',
   },
+  isDefault: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // Create the Address model

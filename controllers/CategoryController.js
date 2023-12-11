@@ -16,7 +16,6 @@ exports.addCategory = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-
 // Update an existing category
 exports.updateCategory = async (req, res) => {
   try {

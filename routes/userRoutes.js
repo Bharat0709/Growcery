@@ -44,6 +44,7 @@ Router.post(
 );
 
 Router.get('/allitems', ItemsController.getAllItems);
+Router.get('/groupeditems/:name', ItemsController.groupedItems);
 Router.get('/categories/allcategories', CategoriesController.getCategories);
 Router.get('/filterItems', ItemsController.filterItems);
 
