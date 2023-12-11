@@ -5,7 +5,7 @@ const Item = require('../models/Itemsmodel'); // Replace with your item model
 // GET request to retrieve all items from the database
 exports.getAllItems = async (req, res) => {
   try {
-        const items = await Item.find()
+    const items = await Item.find()
       .populate('category', 'name image') // Populate the 'category' field with 'name' and 'image'
       .exec();
 
@@ -19,6 +19,45 @@ exports.getAllItems = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+async function groupItemsByName(itemname) {
+  try {
+    const groupedItems = await Item.aggregate([
+      {
+        $match: {
+          name: itemname, // Case-insensitive regex
+        },
+      },
+      {
+        $group: {
+          _id: '$name',
+          items: {
+            $push: {
+              _id: '$_id',
+              price: '$price',
+              quantity: '$quantity',
+            },
+          },
+        },
+      },
+    ]);
+
+    return groupedItems;
+  } catch (error) {
+    console.error('Error grouping items:', error);
+    throw error;
+  }
+}
+
+exports.groupedItems = async (req, res) => {
+  try {
+    const itemName = req.params.name;
+    const itemDetails = await groupItemsByName(itemName);
+    res.json(itemDetails);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
@@ -105,7 +144,6 @@ exports.filterItems = async (req, res) => {
     if (filters) {
       const filterArray = filters.split(',');
       filterArray.forEach((filter) => {
-
         const [filterKey, filterValue] = filter.split('=');
         query[filterKey] = JSON.parse(filterValue);
       });
@@ -139,5 +177,3 @@ exports.filterItems = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-
-

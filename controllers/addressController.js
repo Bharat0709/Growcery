@@ -12,6 +12,7 @@ exports.addaddress = async (req, res) => {
     landmark,
     alternativePhone,
     addressType,
+    isDefault,
   } = req.body;
 
   try {
@@ -27,6 +28,7 @@ exports.addaddress = async (req, res) => {
       landmark,
       alternativePhone,
       addressType,
+      isDefault
     });
 
     // Save the new address to the database

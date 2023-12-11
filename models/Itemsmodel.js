@@ -27,6 +27,14 @@ const groceryItemSchema = new mongoose.Schema({
     ref: 'Category', // Reference to the Category schema
     required: [true, 'Please specify the category of the item'],
   },
+  discountedPrice: {
+    type: Number,
+    default: 0, // You can set a default value if needed
+  },
+  quantity: {
+    type: String,
+    required: [true, 'Please specify the quantity of the item'], // You can set a default value if needed
+  },
   inStock: {
     type: Boolean,
     required: [true, 'Please specify if the item is in stock or not'],
