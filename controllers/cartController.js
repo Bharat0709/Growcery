@@ -1,9 +1,13 @@
 const Order = require('../models/ordersmodel'); // Import the Order model
-
+const twilio = require('twilio');
+const client = twilio(process.env.TWILLIOUSERNAME, process.env.TWILLIOPASSWORD);
 const Item = require('../models/Itemsmodel');
 const user = require('../models/usermodel');
 const Cart = require('../models/cartmodel');
 const Address = require('../models/addressmodel');
+
+const dotenv = require('dotenv');
+dotenv.config({ path: './.env' });
 
 // Add item to cart
 exports.addtocart = async (req, res) => {
@@ -209,12 +213,10 @@ exports.deleteItemFromCart = async (req, res) => {
 
 exports.placeOrder = async (req, res) => {
   try {
-    const user = req.userId;
-    console.log('user Id ', user); // Assuming you have a middleware to extract user ID from the request
+    const user = req.userId; // Assuming you have a middleware to extract user ID from the request
 
     // Retrieve user's cart with details
     const cart = await Cart.findOne({ user: user });
-    console.log(cart);
 
     if (!cart) {
       return res.status(404).json({ error: 'Cart not found' });
@@ -223,7 +225,6 @@ exports.placeOrder = async (req, res) => {
     // Retrieve user's selected address
     const addresses = await Address.find({ userId: user });
     const address = addresses.length > 0 ? addresses[0] : null;
-    console.log(address);
 
     if (!address) {
       return res.status(404).json({ error: 'Address not found' });
@@ -249,6 +250,7 @@ exports.placeOrder = async (req, res) => {
         };
       })
     );
+    console.log(cart.items);
 
     const order = new Order({
       user: user,
@@ -256,19 +258,43 @@ exports.placeOrder = async (req, res) => {
       address: address._id,
       items: cart.items.map((item) => ({
         itemId: item.itemId._id,
-        // itemDetails: { name: item.itemId.name, price: item.itemId.price },
         quantity: item.quantity,
       })),
-      // Add other order details like total price, shipping address, order date, etc.
     });
 
     // Save the order
     await order.save();
 
-    // You may want to clear the user's cart here
-    // await Cart.findOneAndUpdate({ user: userId }, { items: [] });
+    client.messages.create({
+      body: `*🛍 Order Confirmation*
 
-    // Respond to the user with the order details
+📦 *Items Ordered*:
+
+${itemsDetails
+  .map(
+    (item, index) =>
+      `*${index + 1}. ${item.itemDetails.name} - ${item.quantity} x ₹${
+        item.itemDetails.price
+      } = ₹${item.quantity * item.itemDetails.price}*`
+  )
+  .join('\n\n')}
+
+📊 Order Summary:
+Total Items: *${totalQuantity}*
+Total Price: *₹${totalPrice}*
+
+📍 Delivery Address:
+*Name: ${address.fullName}*
+*Mobile Number: ${user.mobile}*
+*Locality: ${address.locality}*
+*Landmark: ${address.landmark}*,
+*State: ${address.state}*
+*Pincode: ${address.pincode}*
+🚚 Your order is confirmed and will be delivered soon. Thank you for shopping with us! 🙏`,
+      from: 'whatsapp:+14155238886',
+      to: `whatsapp:${user.mobile}`,
+    });
+
     res.status(200).json({
       message: 'Order created successfully',
       order: {
