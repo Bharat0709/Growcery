@@ -235,10 +235,7 @@ exports.placeOrder = async (req, res) => {
       (total, item) => total + item.quantity,
       0
     );
-    const totalPrice = cart.items.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
+
     // Retrieve detailed information for each item in the cart
     const itemsDetails = await Promise.all(
       cart.items.map(async (item) => {
@@ -250,7 +247,11 @@ exports.placeOrder = async (req, res) => {
         };
       })
     );
-    console.log(cart.items);
+    const totalPrice = itemsDetails.reduce(
+      (total, item) => total + item.quantity * item.itemDetails.price,
+      0
+    );
+    console.log(totalPrice);
 
     const order = new Order({
       user: user,
@@ -281,7 +282,10 @@ ${itemsDetails
 
 📊 Order Summary:
 Total Items: *${totalQuantity}*
-Total Price: *₹${totalPrice}*
+Total Price: *₹${itemsDetails.reduce(
+        (total, item) => total + item.quantity * item.itemDetails.price,
+        0
+      )}*
 
 📍 Delivery Address:
 *Name: ${address.fullName}*
