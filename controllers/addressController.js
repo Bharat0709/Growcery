@@ -33,7 +33,6 @@ exports.addaddress = async (req, res) => {
 
     // Save the new address to the database
     await newAddress.save();
-
     res
       .status(201)
       .json({ message: 'Address added successfully', address: newAddress });
