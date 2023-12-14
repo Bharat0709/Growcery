@@ -7,12 +7,14 @@ const { MongoClient } = require('mongodb');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
+
+
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log(`Server is running on ${port}`);
 });
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: './.env' });
 const mongoURI = process.env.DATABASE; 
 
 mongoose.connect(mongoURI, {

@@ -3,11 +3,11 @@ const NodeCache = require('node-cache');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const twilio = require('twilio');
 const rateLimit = require('express-rate-limit');
+const twilio = require('twilio')
 const otpCache = new NodeCache();
 const dotenv = require('dotenv');
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: './.env' });
 const secretKey = process.env.JWT_SECRET;
 
 const client = twilio(process.env.TWILLIOUSERNAME, process.env.TWILLIOPASSWORD);
@@ -25,18 +25,18 @@ exports.sendOTP = (req, res) => {
 
     let otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    otpCache.set(mobile, otp, 60 * 5);
-
     client.messages.create({
-      body: `Your OTP for signup is: ${otp}`,
-      to: `+${mobile}`,
-      from: '+12566079867',
+      body: `OTP to login to Growsery : ${otp}`,
+      from: 'whatsapp:+14155238886',
+      to: `whatsapp:${mobile}`,
     });
+
+    otpCache.set(mobile, otp, 60 * 5);
 
     res.status(200).json({ message: 'OTP sent successfully', otp });
   } catch (error) {
     // Handle any errors that occur during OTP generation and sending here
-    console.error(error);
+    console.error(error, 'ERROR');
     res.status(500).json({ error: 'An error occurred while sending the OTP' });
   }
 };
