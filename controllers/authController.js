@@ -4,11 +4,12 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const rateLimit = require('express-rate-limit');
-const twilio = require('twilio')
+const twilio = require('twilio');
 const otpCache = new NodeCache();
 const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 const secretKey = process.env.JWT_SECRET;
+const cookie = require('cookie-parser');
 
 const client = twilio(process.env.TWILLIOUSERNAME, process.env.TWILLIOPASSWORD);
 
@@ -68,6 +69,18 @@ exports.verifyOTP = async (req, res) => {
       const token = jwt.sign({ id: existingUser }, secretKey, {
         expiresIn: '10d',
       });
+
+      const cookieOptions = {
+        expires: new Date(
+          Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+        ),
+        httpOnly: true,
+      };
+      if (process.env.NODE_ENV === 'production') {
+        cookieOptions.secure = true;
+      }
+      res.cookie('jwt', token, cookieOptions);
+
       console.log(token);
 
       return res

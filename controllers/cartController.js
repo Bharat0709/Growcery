@@ -5,7 +5,6 @@ const Item = require('../models/Itemsmodel');
 const user = require('../models/usermodel');
 const Cart = require('../models/cartmodel');
 const Address = require('../models/addressmodel');
-
 const dotenv = require('dotenv');
 dotenv.config({ path: './.env' });
 
@@ -213,19 +212,18 @@ exports.deleteItemFromCart = async (req, res) => {
 
 exports.placeOrder = async (req, res) => {
   try {
-    const user = req.userId; // Assuming you have a middleware to extract user ID from the request
-
+    const user = req.userId;
+    const { addressId } = req.body;
+    
     // Retrieve user's cart with details
     const cart = await Cart.findOne({ user: user });
-
+    
     if (!cart) {
       return res.status(404).json({ error: 'Cart not found' });
     }
-
+    
     // Retrieve user's selected address
-    const addresses = await Address.find({ userId: user });
-    const address = addresses.length > 0 ? addresses[0] : null;
-
+    const address = await Address.findOne({ _id: addressId }); // Assuming you have a middleware to extract user ID from the request
     if (!address) {
       return res.status(404).json({ error: 'Address not found' });
     }
