@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const groceryItemSchema = new mongoose.Schema({
+const itemSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please enter the name of the item'],
@@ -17,10 +17,6 @@ const groceryItemSchema = new mongoose.Schema({
   price: {
     type: Number,
     required: [true, 'Please enter the price of the item'],
-  },
-  isVeg: {
-    type: Boolean,
-    required: [true, 'Please specify if the item is vegetarian or not'],
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
@@ -45,4 +41,4 @@ const groceryItemSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('GroceryItem', groceryItemSchema);
+module.exports = mongoose.model('Item', itemSchema);

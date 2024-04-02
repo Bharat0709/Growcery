@@ -11,7 +11,7 @@ const Router = express.Router();
 Router.post(
   '/addtocart/:itemId',
   authenticateJWT.authenticateJWT,
-  CartController.addtocart
+  CartController.addToCart
 );
 
 Router.post(
@@ -30,12 +30,23 @@ Router.delete(
   authenticateJWT.authenticateJWT,
   CartController.deleteItemFromCart
 );
+Router.delete(
+  '/clearcart',
+  authenticateJWT.authenticateJWT,
+  CartController.clearCart
+);
 
 Router.get(
   '/getcartitems',
   authenticateJWT.authenticateJWT,
   CartController.getAllItemsInCart
 );
+
+// Router.get(
+//   '/allorders',
+//   authenticateJWT.authenticateJWT,
+//   CartController.getAllOrders
+// );
 
 Router.post(
   '/order',
