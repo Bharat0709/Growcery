@@ -18,6 +18,7 @@ app.use(cors());
 app.use(mongoSanitize());
 
 app.use(express.static('public'));
+
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/items', itemsRouter);
 app.use('/api/v1/admin', adminRouter);

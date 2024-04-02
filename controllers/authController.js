@@ -27,7 +27,7 @@ exports.sendOTP = (req, res) => {
     let otp = Math.floor(100000 + Math.random() * 900000).toString();
 
     client.messages.create({
-      body: `OTP to login to Growsery : ${otp}`,
+      body: `OTP to login to NSB : ${otp}`,
       from: 'whatsapp:+14155238886',
       to: `whatsapp:${mobile}`,
     });
